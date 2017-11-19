@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript" src="key.js"></script>
+	<script type="text/javascript" src="engine.js"></script>
+	<script type="text/javascript" src="graph.js"></script>
+	<script type="text/javascript" src="player.js"></script>
+	<script type="text/javascript" src="grid.js"></script>
+	<script type="text/javascript" src="ball.js"></script>
+
+	<style type="text/css">
+		div {
+			position: absolute;
+			top: 15px;
+			left: 10px;
+		}
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		span {
+			display: block;
+			position: absolute;
+			top: 35px;
+			left: 10px;
+		}
+	</style>
+
+	<canvas id="canvasId" height="480" width="640"></canvas>
+	<div>Счет игрока: <b id="score">0</b></div>
+	<span>HP: <b id="hp">3</b></span>
+	<script type="text/javascript">
+		init();
+
+		var map = {
+			color: '#a37a50',
+			width : 40,
+			height : 20,
+			offset : 5,
+
+			tiles : [
+			[0, 1, 0, 1, 0, 1, 1, 0, 0, 1],
+			[0, 0, 0, 1, 1, 0, 0, 0, 1, 1],
+			[1, 1, 1, 0, 0, 0, 0, 1, 0, 1],
+			[1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+			[0, 1, 0, 1, 1, 1, 1, 1, 1, 1],
+			],
+
+		};
+
+		grid.create(map);
+
+
+
+		//grid.generate(2, 60, 30, '#B4515C');
+		//player.init(width / 2, 280, '#5E343D');
+		ball.init(player.x + (player.w / 2), player.y - ball.radius, 4, 'white');
+		var game = function() {
+			fillAll('#f07575');
+			grid.draw();
+			//drawCircle(0, 0, 5, 'red');
+			//drawRect(14, 15, 45, 56, 'blue');
+			//en1.draw();
+			ball.collision();
+			ball.move();
+			ball.draw();
+			player.move();
+			player.draw();
+		};
+		
+		/*
+		colors:
+		#f07575
+		#a35050
+		#f0b375
+		#a37a50
+		#0f0f0f
+		#f0f0f0
+		*/
+
+		startGame(game);
+	</script>
+</body>
+</html>
